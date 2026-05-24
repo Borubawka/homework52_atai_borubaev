@@ -43,6 +43,11 @@
 {% else %}
     <p>Дата выполнения не указана</p>
 {% endif %}
+    <p>
+    <a href="/delete/?pk={{ task.pk }}">
+        Удалить
+    </a>
+</p>
 </div>
 
 {% endfor %}

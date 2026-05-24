@@ -13,7 +13,6 @@ def index_view(request):
 def create_task_view(request):
 
     if request.method == 'POST':
-
         description = request.POST.get('description')
         status = request.POST.get('status')
         due_date = request.POST.get('due_date')
@@ -27,3 +26,13 @@ def create_task_view(request):
         return redirect('/')
 
     return render(request, 'create_task.html')
+
+def delete_task_view(request):
+
+    task_id = request.GET.get('pk')
+
+    task = Task.objects.get(pk=task_id)
+
+    task.delete()
+
+    return redirect('/')
