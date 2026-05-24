@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from webapp.models import Task
 
 def index_view(request):
@@ -9,3 +9,21 @@ def index_view(request):
     }
 
     return render(request, 'index.html', context)
+
+def create_task_view(request):
+
+    if request.method == 'POST':
+
+        description = request.POST.get('description')
+        status = request.POST.get('status')
+        due_date = request.POST.get('due_date')
+
+        Task.objects.create(
+            description=description,
+            status=status,
+            due_date=due_date if due_date else None
+        )
+
+        return redirect('/')
+
+    return render(request, 'create_task.html')

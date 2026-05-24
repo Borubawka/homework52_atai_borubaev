@@ -28,7 +28,9 @@
 <body>
 
 <h1>Список задач</h1>
-
+<p>
+    <a href="/add/">Добавить задачу</a>
+</p>
 {% for task in tasks %}
 
 <div class="task">
@@ -37,7 +39,7 @@
     <p>Статус: {{ task.get_status_display }}</p>
 
     {% if task.due_date %}
-    <p>Дата выполнения: {{ task.due_date }}</p>
+    <p>Дата выполнения: {{ task.due_date|date:"d.m.y" }}</p>
 {% else %}
     <p>Дата выполнения не указана</p>
 {% endif %}
