@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f3f3f3;
+            padding: 20px;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+
+        .task {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Список задач</h1>
+
+{% for task in tasks %}
+
+<div class="task">
+    <h3>{{ task.description }}</h3>
+
+    <p>Статус: {{ task.get_status_display }}</p>
+
+    {% if task.due_date %}
+    <p>Дата выполнения: {{ task.due_date }}</p>
+{% else %}
+    <p>Дата выполнения не указана</p>
+{% endif %}
+</div>
+
+{% endfor %}
+
+</body>
+</html>
