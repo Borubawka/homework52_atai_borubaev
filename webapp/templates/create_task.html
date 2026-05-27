@@ -1,53 +1,12 @@
-<!DOCTYPE html>
-<html lang="ru">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Добавить задачу</title>
+{% block title %}
+Добавить задачу
+{% endblock %}
 
-    <style>
-        body {
-            font-family: Arial;
-            background-color: #f3f3f3;
-            padding: 20px;
-        }
-
-        h1 {
-            color: darkgreen;
-        }
-
-        form {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 400px;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 8px;
-        }
-
-        button {
-            background-color: darkgreen;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-
-<body>
+{% block content %}
 
 <h1>Добавить задачу</h1>
-
-<p>
-    <a href="/">На главную</a>
-</p>
 
 <form method="POST">
 
@@ -63,7 +22,9 @@
 
     <select name="status">
 
-        <option value="new">Новая</option>
+        <option value="new">
+            Новая
+        </option>
 
         <option value="in_progress">
             В процессе
@@ -85,5 +46,4 @@
 
 </form>
 
-</body>
-</html>
+{% endblock %}

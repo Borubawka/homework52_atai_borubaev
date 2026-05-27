@@ -1,69 +1,40 @@
-<!DOCTYPE html>
-<html lang="ru">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Подробности задачи</title>
+{% block title %}
+Подробности задачи
+{% endblock %}
 
-    <style>
-        body {
-            font-family: Arial;
-            background-color: #f3f3f3;
-            padding: 20px;
-        }
+{% block content %}
 
-        .task-card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 700px;
-        }
+<h1>Подробности задачи</h1>
 
-        h1 {
-            color: darkblue;
-        }
+<div class="task-card">
 
-        .details {
-            white-space: pre-line;
-        }
-    </style>
-</head>
-
-<body>
-
-    <h1>Подробности задачи</h1>
+    <h2>{{ task.description }}</h2>
 
     <p>
-        <a href="/">На главную</a>
+        <strong>Статус:</strong>
+        {{ task.get_status_display }}
     </p>
 
-    <div class="task-card">
-        <h2>{{ task.description }}</h2>
+    <p>
+        <strong>Дата выполнения:</strong>
 
-        <p>
-            <strong>Статус:</strong>
-            {{ task.get_status_display }}
-        </p>
+        {% if task.due_date %}
+            {{ task.due_date|date:"d.m.Y" }}
+        {% else %}
+            не указана
+        {% endif %}
+    </p>
 
-        <p>
-            <strong>Дата выполнения:</strong>
+    <hr>
 
-            {% if task.due_date %}
-                {{ task.due_date|date:"d.m.Y" }}
-            {% else %}
-                не указана
-            {% endif %}
-        </p>
+    <h3>Подробное описание</h3>
 
-        <hr>
+    <p class="details">
+        {{ task.details }}
+    </p>
 
-        <h3>Подробное описание</h3>
+</div>
 
-        <p class="details">
-            {{ task.details }}
-        </p>
-    </div>
-
-</body>
-
-</html>
+{% endblock %}

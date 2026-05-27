@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}To Do List{% endblock %}</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f3f3f3;
+            padding: 20px;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+
+        .task {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .task-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 700px;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 500px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 8px;
+        }
+
+        button {
+            background-color: darkgreen;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .details {
+            white-space: pre-line;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+        }
+
+        .navbar a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: darkblue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <a href="{% url 'index' %}">Главная</a>
+
+    <a href="{% url 'task_add' %}">
+        Добавить задачу
+    </a>
+</div>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

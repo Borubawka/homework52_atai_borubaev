@@ -7,8 +7,8 @@ from webapp.views import (
 )
 
 urlpatterns = [
-    path('', index_view),
-    path('add/', create_task_view),
-    path('delete/<int:task_id>/', delete_task_view),
-    path('task/<int:task_id>/', task_detail_view),
+    path('', index_view, name='index'),
+    path('add/', create_task_view, name='task_add'),
+    path('delete/<int:task_id>/', delete_task_view, name='task_delete'),
+    path('task/<int:task_id>/', task_detail_view, name='task_detail'),
 ]
