@@ -6,12 +6,14 @@ STATUS_CHOICES = [
     ('done', 'Сделано')
 ]
 
-
 class Task(models.Model):
     description = models.TextField(
-        null=False,
-        blank=False,
         verbose_name='Описание'
+    )
+
+    details = models.TextField(
+        blank=True,
+        verbose_name='Подробное описание'
     )
 
     status = models.CharField(
@@ -22,10 +24,10 @@ class Task(models.Model):
     )
 
     due_date = models.DateField(
-        null=True,
         blank=True,
+        null=True,
         verbose_name='Дата выполнения'
     )
 
     def __str__(self):
-        return f'{self.pk}. {self.description}'
+        return self.description
