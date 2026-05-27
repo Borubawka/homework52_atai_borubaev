@@ -1,7 +1,5 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from webapp.models import Task
-
 def index_view(request):
     tasks = Task.objects.all()
 
@@ -24,12 +22,23 @@ def create_task_view(request):
         description=description,
         details=details,
         status=status,
-        due_date=due_date or None
+        due_date=due_date if due_date else None
     )
 
-    return redirect('index')
+    return redirect('/')
 
-def delete_task_view(request, pk):
-    task = Task.objects.get(pk=pk)
+def delete_task_view(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+
     task.delete()
-    return redirect('index')
+
+    return redirect('/')
+
+def task_detail_view(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+
+    context = {
+        'task': task
+    }
+
+    return render(request, 'task_detail.html', context)
