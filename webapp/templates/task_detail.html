@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block title %}
 Подробности задачи
 {% endblock %}
@@ -35,6 +34,14 @@
         {{ task.details }}
     </p>
 
+    <br>
+
+    <a href="{% url 'task_edit' task.id %}" class="btn btn-edit">
+        Редактировать
+    </a>
+    <a href="{% url 'task_delete' task.id %}" class="btn btn-delete">
+        Удалить
+    </a>
 </div>
 
 {% endblock %}

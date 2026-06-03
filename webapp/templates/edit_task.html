@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}
+Редактировать задачу
+{% endblock %}
+
+{% block content %}
+
+<h1>Редактировать задачу</h1>
+
+<form method="POST">
+
+    {% include 'includes/task_form.html' %}
+
+    <button type="submit">
+        Сохранить
+    </button>
+
+</form>
+
+{% endblock %}
