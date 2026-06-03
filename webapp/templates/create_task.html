@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block title %}
 Добавить задачу
 {% endblock %}
@@ -10,35 +9,7 @@
 
 <form method="POST">
 
-    {% csrf_token %}
-
-    <label>Описание</label>
-    <textarea name="description" required></textarea>
-
-    <label>Подробное описание</label>
-    <textarea name="details"></textarea>
-
-    <label>Статус</label>
-
-    <select name="status">
-
-        <option value="new">
-            Новая
-        </option>
-
-        <option value="in_progress">
-            В процессе
-        </option>
-
-        <option value="done">
-            Сделано
-        </option>
-
-    </select>
-
-    <label>Дата выполнения</label>
-
-    <input type="date" name="due_date">
+    {% include 'includes/task_form.html' %}
 
     <button type="submit">
         Добавить
