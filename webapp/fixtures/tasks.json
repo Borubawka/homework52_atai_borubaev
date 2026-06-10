@@ -1,82 +1,104 @@
 [
 {
+    "model": "webapp.tasktype",
+    "pk": 1,
+    "fields": {
+        "title": "Task"
+    }
+},
+{
+    "model": "webapp.tasktype",
+    "pk": 2,
+    "fields": {
+        "title": "Bug"
+    }
+},
+{
+    "model": "webapp.tasktype",
+    "pk": 3,
+    "fields": {
+        "title": "Enhancement"
+    }
+},
+{
+    "model": "webapp.taskstatus",
+    "pk": 1,
+    "fields": {
+        "title": "New"
+    }
+},
+{
+    "model": "webapp.taskstatus",
+    "pk": 2,
+    "fields": {
+        "title": "In Progress"
+    }
+},
+{
+    "model": "webapp.taskstatus",
+    "pk": 3,
+    "fields": {
+        "title": "Done"
+    }
+},
+{
     "model": "webapp.task",
     "pk": 1,
     "fields": {
-        "description": "Созадть проект",
-        "details": "Спать хочу ужасно, под веки будто песок засыпали",
-        "status": "new",
-        "due_date": null
+        "summary": "Обновить БД",
+        "description": "Для избежания конфликтов с прежними записями БД, обновить БД",
+        "status": 2,
+        "task_type": 3,
+        "created_at": "2026-06-10T16:16:38.776Z",
+        "updated_at": "2026-06-10T16:17:16.337Z"
+    }
+},
+{
+    "model": "webapp.task",
+    "pk": 2,
+    "fields": {
+        "summary": "Создать админку",
+        "description": "После обновления БД зарегать админку",
+        "status": 1,
+        "task_type": 1,
+        "created_at": "2026-06-10T16:17:13.265Z",
+        "updated_at": "2026-06-10T16:17:19.705Z"
     }
 },
 {
     "model": "webapp.task",
     "pk": 3,
     "fields": {
-        "description": "Сделать commit",
-        "details": "Старайся за одну задачу делать хотя бы 5 коммитов чтоб понимать где на каком этапе была ошибка если не запустится что-то",
-        "status": "in_progress",
-        "due_date": "2026-05-25"
+        "summary": "Обновить задачи",
+        "description": "Добавить новые задачи",
+        "status": 1,
+        "task_type": 1,
+        "created_at": "2026-06-10T16:18:17.486Z",
+        "updated_at": "2026-06-10T16:18:17.486Z"
+    }
+},
+{
+    "model": "webapp.task",
+    "pk": 4,
+    "fields": {
+        "summary": "Словить баг",
+        "description": "Словить баг и долго с ним мучиться",
+        "status": 1,
+        "task_type": 2,
+        "created_at": "2026-06-10T16:18:50.377Z",
+        "updated_at": "2026-06-10T16:18:50.377Z"
     }
 },
 {
     "model": "webapp.task",
     "pk": 5,
     "fields": {
-        "description": "Нужно сначала делать ветку, потом уже продолжать работу",
-        "details": "Всегда сначала создавай ветку, после этого только начинай работу. Мержить раньше времени ничего не нужно.",
-        "status": "in_progress",
-        "due_date": null
-    }
-},
-{
-    "model": "webapp.task",
-    "pk": 6,
-    "fields": {
-        "description": "Не уснуть, не словить передоз кофеина",
-        "details": "Пошел 10 день со сном по 5 часов, в конце недели отоспаться",
-        "status": "in_progress",
-        "due_date": "2026-05-23"
-    }
-},
-{
-    "model": "webapp.task",
-    "pk": 7,
-    "fields": {
-        "description": "Проверка строчности",
-        "details": "1. Утро\r\n2. День\r\n3 Вечер\r\n4ю Ночь",
-        "status": "new",
-        "due_date": null
-    }
-},
-{
-    "model": "webapp.task",
-    "pk": 9,
-    "fields": {
-        "description": "fdgdfgdfgd",
-        "details": "dsfsdfds\r\ndsfsdfdsf\r\nsadsadad",
-        "status": "new",
-        "due_date": null
-    }
-},
-{
-    "model": "webapp.task",
-    "pk": 12,
-    "fields": {
-        "description": "куекуе",
-        "details": "кпукеуке",
-        "status": "in_progress",
-        "due_date": "2026-06-02"
-    }
-},
-{
-    "model": "webapp.task",
-    "pk": 13,
-    "fields": {
-        "description": "рикеик",
-        "details": "fdkgjdfghdfjk",
-        "status": "new",
-        "due_date": "2026-06-19"
+        "summary": "Найти решение бага",
+        "description": "Найти корень бага, исправить и получить облегчение в награду",
+        "status": 3,
+        "task_type": 3,
+        "created_at": "2026-06-10T16:19:41.688Z",
+        "updated_at": "2026-06-10T16:19:41.688Z"
     }
 }
 ]
