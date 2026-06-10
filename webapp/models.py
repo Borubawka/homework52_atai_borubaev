@@ -36,10 +36,9 @@ class Task(models.Model):
         verbose_name='Статус'
     )
 
-    task_type = models.ForeignKey(
+    task_types = models.ManyToManyField(
         TaskType,
-        on_delete=models.PROTECT,
-        verbose_name='Тип задачи'
+        verbose_name='Типы задач'
     )
 
     created_at = models.DateTimeField(
