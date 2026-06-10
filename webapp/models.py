@@ -1,33 +1,56 @@
 from django.db import models
 
-STATUS_CHOICES = [
-    ('new', 'Новая'),
-    ('in_progress', 'В процессе'),
-    ('done', 'Сделано')
-]
-
-class Task(models.Model):
-    description = models.TextField(
-        verbose_name='Описание'
-    )
-
-    details = models.TextField(
-        blank=True,
-        verbose_name='Подробное описание'
-    )
-
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='new',
-        verbose_name='Статус'
-    )
-
-    due_date = models.DateField(
-        blank=True,
-        null=True,
-        verbose_name='Дата выполнения'
+class TaskType(models.Model):
+    title = models.CharField(
+        max_length=100,
+        verbose_name='Тип задачи'
     )
 
     def __str__(self):
-        return self.description
+        return self.title
+
+class TaskStatus(models.Model):
+    title = models.CharField(
+        max_length=100,
+        verbose_name='Статус'
+    )
+
+    def __str__(self):
+        return self.title
+
+
+class Task(models.Model):
+    summary = models.CharField(
+        max_length=255,
+        verbose_name='Краткое описание'
+    )
+
+    description = models.TextField(
+        blank=True,
+        verbose_name='Полное описание'
+    )
+
+    status = models.ForeignKey(
+        TaskStatus,
+        on_delete=models.PROTECT,
+        verbose_name='Статус'
+    )
+
+    task_type = models.ForeignKey(
+        TaskType,
+        on_delete=models.PROTECT,
+        verbose_name='Тип задачи'
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата создания'
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name='Дата изменения'
+    )
+
+    def __str__(self):
+        return self.summary
