@@ -2,14 +2,23 @@
 {% block title %}
 Удаление задачи
 {% endblock %}
-
 {% block content %}
 
 <h1>Удаление задачи</h1>
 
 <div class="task-card">
 
-    <h2>{{ task.description }}</h2>
+    <h2>{{ task.summary }}</h2>
+
+    <p>
+        <strong>Тип:</strong>
+        {{ task.task_type.title }}
+    </p>
+
+    <p>
+        <strong>Статус:</strong>
+        {{ task.status.title }}
+    </p>
 
     <p>
         Вы уверены, что хотите удалить эту задачу?
