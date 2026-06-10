@@ -13,9 +13,9 @@ class TaskForm(forms.ModelForm):
         label='Статус'
     )
 
-    task_type = forms.ModelChoiceField(
+    task_types = forms.ModelMultipleChoiceField(
         queryset=TaskType.objects.all(),
-        label='Тип задачи'
+        label='Типы задач'
     )
 
     class Meta:
@@ -25,5 +25,5 @@ class TaskForm(forms.ModelForm):
             'summary',
             'description',
             'status',
-            'task_type'
+            'task_types'
         )

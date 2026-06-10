@@ -11,8 +11,12 @@
     <h2>{{ task.summary }}</h2>
 
     <p>
-        <strong>Тип:</strong>
-        {{ task.task_type.title }}
+        <strong>Типы:</strong>
+
+        {% for task_type in task.task_types.all %}
+            {{ task_type.title }}
+            {% if not forloop.last %}, {% endif %}
+        {% endfor %}
     </p>
 
     <p>
