@@ -15,7 +15,8 @@ class TaskForm(forms.ModelForm):
 
     task_types = forms.ModelMultipleChoiceField(
         queryset=TaskType.objects.all(),
-        label='Типы задач'
+        label='Типы задач',
+        widget=forms.CheckboxSelectMultiple
     )
 
     class Meta:
