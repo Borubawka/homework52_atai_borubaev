@@ -3,9 +3,7 @@
 Список задач
 {% endblock %}
 {% block content %}
-
 <h1>Список задач</h1>
-
 {% for task in tasks %}
 
 <div class="task">
@@ -14,7 +12,12 @@
 
     <p>
         <strong>Тип:</strong>
-        {{ task.task_type.title }}
+
+        {% for task_type in task.task_types.all %}
+            {{ task_type.title }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            Не указан
+        {% endfor %}
     </p>
 
     <p>
