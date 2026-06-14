@@ -1,7 +1,7 @@
 from datetime import timedelta
 from django.utils import timezone
 from webapp.models import Task
-
+from django.db.models import Q
 closed_tasks_last_month = Task.objects.filter(
     status__title='Done',
     updated_at__gte=timezone.now() - timedelta(days=30)
@@ -19,8 +19,8 @@ tasks_by_status_and_type = Task.objects.filter(
 ).distinct()
 
 not_closed_bug_tasks = Task.objects.filter(
-    summary__icontains='bug',
-    task_types__title='Bug'
+    Q(summary__icontains='bug') |
+    Q(task_types__title='Bug')
 ).exclude(
     status__title='Done'
-)
+).distinct()
