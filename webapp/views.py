@@ -1,7 +1,10 @@
 from django.shortcuts import (render, redirect, get_object_or_404)
+from django.urls import reverse
 from django.views import View
+from django.views.generic import FormView
 from webapp.models import Task
 from webapp.forms import TaskForm
+
 class IndexView(View):
 
     def get(self, request, *args, **kwargs):
@@ -37,33 +40,12 @@ class TaskDetailView(View):
             context
         )
 
-class TaskCreateView(View):
+class TaskCreateView(FormView):
 
-    def get(self, request, *args, **kwargs):
+    template_name = 'create_task.html'
+    form_class = TaskForm
 
-        form = TaskForm()
-
-        return render(
-            request,
-            'create_task.html',
-            {
-                'form': form
-            }
-        )
-
-    def post(self, request, *args, **kwargs):
-
-        form = TaskForm(request.POST)
-
-        if not form.is_valid():
-
-            return render(
-                request,
-                'create_task.html',
-                {
-                    'form': form
-                }
-            )
+    def form_valid(self, form):
 
         task = form.save()
 
@@ -72,48 +54,34 @@ class TaskCreateView(View):
             task_id=task.id
         )
 
-class TaskUpdateView(View):
+class TaskUpdateView(FormView):
 
-    def get(self, request, task_id, *args, **kwargs):
+    template_name = 'edit_task.html'
+    form_class = TaskForm
 
-        task = get_object_or_404(
+    def get_form_kwargs(self):
+
+        kwargs = super().get_form_kwargs()
+
+        kwargs['instance'] = get_object_or_404(
             Task,
-            id=task_id
+            id=self.kwargs['task_id']
         )
 
-        form = TaskForm(instance=task)
+        return kwargs
 
-        return render(
-            request,
-            'edit_task.html',
-            {
-                'form': form,
-                'task': task
-            }
-        )
+    def get_context_data(self, **kwargs):
 
-    def post(self, request, task_id, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
 
-        task = get_object_or_404(
+        context['task'] = get_object_or_404(
             Task,
-            id=task_id
+            id=self.kwargs['task_id']
         )
 
-        form = TaskForm(
-            request.POST,
-            instance=task
-        )
+        return context
 
-        if not form.is_valid():
-
-            return render(
-                request,
-                'edit_task.html',
-                {
-                    'form': form,
-                    'task': task
-                }
-            )
+    def form_valid(self, form):
 
         task = form.save()
 
