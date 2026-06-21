@@ -19,22 +19,26 @@ class ProjectForm(forms.ModelForm):
             'end_date'
         )
 
-    def clean(self):
+        widgets = {
+            'start_date': forms.DateInput(
+                attrs={'type': 'date'}
+            ),
+            'end_date': forms.DateInput(
+                attrs={'type': 'date'}
+            )
+        }
 
-        cleaned_data = super().clean()
+    def clean_name(self):
 
-        start_date = cleaned_data.get('start_date')
-        end_date = cleaned_data.get('end_date')
+        name = self.cleaned_data['name']
 
-        if start_date and end_date:
+        if len(name) < 3:
 
-            if end_date < start_date:
+            raise ValidationError(
+                'Название проекта должно содержать минимум 3 символа'
+            )
 
-                raise ValidationError(
-                    'Дата окончания не может быть раньше даты начала'
-                )
-
-        return cleaned_data
+        return name
 
 class TaskForm(forms.ModelForm):
 

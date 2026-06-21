@@ -1,47 +1,99 @@
 {% extends 'base.html' %}
 {% block title %}
-Список задач
+Список проектов
 {% endblock %}
 {% block content %}
-<h1>Список задач</h1>
-{% for task in tasks %}
 
-<div class="task">
+<h1>Список проектов</h1>
 
-    <h3>{{ task.summary }}</h3>
+<form method="GET">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Поиск проекта..."
+        value="{{ request.GET.search }}"
+    >
+
+    <button type="submit">
+        Найти
+    </button>
+
+</form>
+
+<br>
+
+{% if projects %}
+
+    {% for project in projects %}
+
+        <div class="task">
+
+            <h3>{{ project.name }}</h3>
+
+            <p>
+                {{ project.description }}
+            </p>
+
+            <p>
+                <strong>Дата начала:</strong>
+                {{ project.start_date }}
+            </p>
+
+            <p>
+                <a href="{% url 'project_detail' project.id %}">
+                    Подробнее
+                </a>
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+{% else %}
 
     <p>
-        <strong>Тип:</strong>
-
-        {% for task_type in task.task_types.all %}
-            {{ task_type.title }}{% if not forloop.last %}, {% endif %}
-        {% empty %}
-            Не указан
-        {% endfor %}
+        Проекты не найдены.
     </p>
 
-    <p>
-        <strong>Статус:</strong>
-        {{ task.status.title }}
-    </p>
+{% endif %}
 
-    <p>
-        <strong>Создана:</strong>
-        {{ task.created_at|date:"d.m.Y H:i" }}
-    </p>
+{% if is_paginated %}
 
-    <p>
-        <a href="{% url 'task_detail' task.id %}">
-            Подробнее
-        </a>
-    </p>
+    <div style="margin-top: 20px;">
 
-</div>
+        {% if page_obj.has_previous %}
 
-{% empty %}
+            <a href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                Первая
+            </a>
 
-<p>Задачи отсутствуют.</p>
+            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                Назад
+            </a>
 
-{% endfor %}
+        {% endif %}
+
+        <span>
+            Страница {{ page_obj.number }}
+            из
+            {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+
+            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                Вперёд
+            </a>
+
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                Последняя
+            </a>
+
+        {% endif %}
+
+    </div>
+
+{% endif %}
 
 {% endblock %}

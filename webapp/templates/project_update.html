@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+Редактировать проект
+{% endblock %}
+{% block content %}
+
+<h1>Редактировать проект</h1>
+
+<form method="POST">
+
+    {% include 'includes/project_form.html' %}
+
+    <button type="submit">
+        Сохранить
+    </button>
+
+</form>
+
+{% endblock %}
