@@ -1,5 +1,28 @@
 from django.db import models
 
+class Project(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Название'
+    )
+
+    description = models.TextField(
+        verbose_name='Описание'
+    )
+
+    start_date = models.DateField(
+        verbose_name='Дата начала'
+    )
+
+    end_date = models.DateField(
+        blank=True,
+        null=True,
+        verbose_name='Дата окончания'
+    )
+
+    def __str__(self):
+        return self.name
+
 class TaskType(models.Model):
     title = models.CharField(
         max_length=100,
@@ -18,8 +41,15 @@ class TaskStatus(models.Model):
     def __str__(self):
         return self.title
 
-
 class Task(models.Model):
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name='tasks',
+        verbose_name='Проект',
+        default=1
+    )
+
     summary = models.CharField(
         max_length=255,
         verbose_name='Краткое описание'
