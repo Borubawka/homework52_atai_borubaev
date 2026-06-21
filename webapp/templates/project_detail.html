@@ -5,17 +5,23 @@
 {% block content %}
 
 <h1>{{ project.name }}</h1>
-    <p>
 
-        <a href="{% url 'project_edit' project.id %}" class="btn btn-edit">
-          Редактировать проект
-        </a>
+<p>
 
-        <a href="{% url 'project_delete' project.id %}" class="btn btn-delete">
-          Удалить проект
-        </a>
+    <a href="{% url 'project_edit' project.id %}" class="btn btn-edit">
+        Редактировать проект
+    </a>
 
-    </p>
+    <a href="{% url 'project_delete' project.id %}" class="btn btn-delete">
+        Удалить проект
+    </a>
+
+    <a href="{% url 'task_add' project.id %}" class="btn btn-edit">
+        Создать задачу
+    </a>
+
+</p>
+
 <div class="task-card">
 
     <p>
@@ -33,7 +39,12 @@
 
     <p>
         <strong>Дата окончания:</strong>
-        {{ project.end_date }}
+
+        {% if project.end_date %}
+            {{ project.end_date }}
+        {% else %}
+            Не указана
+        {% endif %}
     </p>
 
     <hr>
