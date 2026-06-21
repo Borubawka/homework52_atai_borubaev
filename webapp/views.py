@@ -1,6 +1,7 @@
 from django.shortcuts import (render, redirect, get_object_or_404)
 from django.urls import reverse
 from django.db.models import Q
+from django.http import Http404
 from django.views import View
 from django.views.generic import (
     ListView,
@@ -12,7 +13,6 @@ from django.views.generic import (
 )
 from webapp.models import (Task, Project)
 from webapp.forms import (TaskForm, ProjectForm)
-
 class IndexView(ListView):
 
     model = Project
@@ -45,7 +45,10 @@ class ProjectDetailView(View):
         )
 
         context = {
-            'project': project
+            'project': project,
+            'tasks': project.tasks.filter(
+                is_deleted=False
+            )
         }
 
         return render(
@@ -100,12 +103,15 @@ class ProjectDeleteView(DeleteView):
 class TaskDetailView(DetailView):
 
     model = Task
-
     template_name = 'task_detail.html'
-
     context_object_name = 'task'
-
     pk_url_kwarg = 'task_id'
+
+    def get_queryset(self):
+
+        return Task.objects.filter(
+            is_deleted=False
+        )
 
 class TaskCreateView(FormView):
 
@@ -135,14 +141,16 @@ class TaskCreateView(FormView):
 class TaskUpdateView(UpdateView):
 
     model = Task
-
     form_class = TaskForm
-
     template_name = 'edit_task.html'
-
     context_object_name = 'task'
-
     pk_url_kwarg = 'task_id'
+
+    def get_queryset(self):
+
+        return Task.objects.filter(
+            is_deleted=False
+        )
 
     def get_success_url(self):
 
@@ -156,18 +164,25 @@ class TaskUpdateView(UpdateView):
 class TaskDeleteView(DeleteView):
 
     model = Task
-
     template_name = 'delete_task.html'
-
     context_object_name = 'task'
-
     pk_url_kwarg = 'task_id'
 
-    def get_success_url(self):
+    def get_queryset(self):
 
-        return reverse(
+        return Task.objects.filter(
+            is_deleted=False
+        )
+
+    def form_valid(self, form):
+
+        self.object = self.get_object()
+
+        self.object.is_deleted = True
+
+        self.object.save()
+
+        return redirect(
             'project_detail',
-            kwargs={
-                'project_id': self.object.project.id
-            }
+            project_id=self.object.project.id
         )

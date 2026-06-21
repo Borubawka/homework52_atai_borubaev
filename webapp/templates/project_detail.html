@@ -51,19 +51,42 @@
 
     <h2>Задачи проекта</h2>
 
-    {% for task in project.tasks.all %}
+    {% for task in tasks %}
 
-        <p>
-            <a href="{% url 'task_detail' task.id %}">
-                {{ task.summary }}
-            </a>
-        </p>
+<div class="task">
 
-    {% empty %}
+    <h3>{{ task.summary }}</h3>
 
-        <p>Задачи отсутствуют.</p>
+    <p>
+        <strong>Статус:</strong>
+        {{ task.status.title }}
+    </p>
 
-    {% endfor %}
+    <p>
+        <a href="{% url 'task_detail' task.id %}">
+            Подробнее
+        </a>
+    </p>
+
+    <p>
+        <a href="{% url 'task_edit' task.id %}">
+            Редактировать
+        </a>
+    </p>
+
+    <p>
+        <a href="{% url 'task_delete' task.id %}">
+            Удалить
+        </a>
+    </p>
+
+</div>
+
+{% empty %}
+
+<p>Задачи отсутствуют.</p>
+
+{% endfor %}
 
 </div>
 
