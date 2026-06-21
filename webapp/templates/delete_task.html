@@ -4,42 +4,64 @@
 {% endblock %}
 {% block content %}
 
-<h1>Удаление задачи</h1>
+<div class="row justify-content-center">
 
-<div class="task-card">
+    <div class="col-md-6">
 
-    <h2>{{ task.summary }}</h2>
+        <div class="card border-danger shadow-sm">
 
-    <p>
-        <strong>Тип:</strong>
-        {{ task.task_type.title }}
-    </p>
+            <div class="card-header bg-danger text-white">
 
-    <p>
-        <strong>Статус:</strong>
-        {{ task.status.title }}
-    </p>
+                Удаление задачи
 
-    <p>
-        Вы уверены, что хотите удалить эту задачу?
-    </p>
+            </div>
 
-    <form method="POST">
+            <div class="card-body">
 
-        {% csrf_token %}
+                <h4>
 
-        <button type="submit">
-            Удалить
-        </button>
+                    {{ task.summary }}
 
-        <a
-            href="{% url 'task_detail' task.id %}"
-            class="btn btn-edit"
-        >
-            Отмена
-        </a>
+                </h4>
 
-    </form>
+                <p>
+
+                    <strong>Статус:</strong>
+                    {{ task.status.title }}
+
+                </p>
+
+                <p>
+
+                    Вы уверены, что хотите удалить задачу?
+
+                </p>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger"
+                    >
+                        Удалить
+                    </button>
+
+                    <a
+                        href="{% url 'task_detail' task.id %}"
+                        class="btn btn-secondary"
+                    >
+                        Отмена
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

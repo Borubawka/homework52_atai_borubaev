@@ -4,95 +4,197 @@
 {% endblock %}
 {% block content %}
 
-<h1>Список проектов</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-<form method="GET">
+    <h1 class="mb-0">
+        Список проектов
+    </h1>
 
-    <input
-        type="text"
-        name="search"
-        placeholder="Поиск проекта..."
-        value="{{ request.GET.search }}"
+    <a
+        href="{% url 'project_add' %}"
+        class="btn btn-success"
     >
+        Создать проект
+    </a>
 
-    <button type="submit">
-        Найти
-    </button>
+</div>
 
-</form>
+<div class="card shadow-sm mb-4">
 
-<br>
+    <div class="card-body">
+
+        <form method="GET">
+
+            <div class="row g-2">
+
+                <div class="col-md-10">
+
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Поиск по названию или описанию..."
+                        value="{{ request.GET.search }}"
+                    >
+
+                </div>
+
+                <div class="col-md-2 d-grid">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Найти
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
 
 {% if projects %}
 
+<div class="row">
+
     {% for project in projects %}
 
-        <div class="task">
+    <div class="col-md-4 mb-4">
 
-            <h3>{{ project.name }}</h3>
+        <div class="card h-100 shadow-sm border-0">
 
-            <p>
-                {{ project.description }}
-            </p>
+            <div class="card-body">
 
-            <p>
-                <strong>Дата начала:</strong>
-                {{ project.start_date }}
-            </p>
+                <h4 class="card-title">
+                    {{ project.name }}
+                </h4>
 
-            <p>
-                <a href="{% url 'project_detail' project.id %}">
+                <p class="card-text">
+
+                    {% if project.description %}
+
+                        {{ project.description|truncatechars:100 }}
+
+                    {% else %}
+                        Описание отсутствует
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+            <div class="card-footer bg-white border-0">
+
+                <p>
+
+                    <strong>Дата начала:</strong><br>
+                    {{ project.start_date }}
+
+                </p>
+
+                <a
+                    href="{% url 'project_detail' project.id %}"
+                    class="btn btn-outline-primary w-100"
+                >
                     Подробнее
                 </a>
-            </p>
+
+            </div>
 
         </div>
 
+    </div>
+
     {% endfor %}
+
+</div>
 
 {% else %}
 
-    <p>
-        Проекты не найдены.
-    </p>
+<div class="alert alert-warning">
+    Проекты не найдены.
+</div>
 
 {% endif %}
 
 {% if is_paginated %}
 
-    <div style="margin-top: 20px;">
+<nav>
+
+    <ul class="pagination justify-content-center">
 
         {% if page_obj.has_previous %}
 
-            <a href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+        <li class="page-item">
+
+            <a
+                class="page-link"
+                href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+            >
                 Первая
             </a>
 
-            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+        </li>
+
+        <li class="page-item">
+
+            <a
+                class="page-link"
+                href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+            >
                 Назад
             </a>
 
+        </li>
+
         {% endif %}
 
-        <span>
-            Страница {{ page_obj.number }}
-            из
-            {{ page_obj.paginator.num_pages }}
-        </span>
+        <li class="page-item active">
+
+            <span class="page-link">
+
+                {{ page_obj.number }}
+                /
+                {{ page_obj.paginator.num_pages }}
+
+            </span>
+
+        </li>
 
         {% if page_obj.has_next %}
 
-            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+        <li class="page-item">
+
+            <a
+                class="page-link"
+                href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+            >
                 Вперёд
             </a>
 
-            <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+        </li>
+
+        <li class="page-item">
+
+            <a
+                class="page-link"
+                href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+            >
                 Последняя
             </a>
 
+        </li>
+
         {% endif %}
 
-    </div>
+    </ul>
+
+</nav>
 
 {% endif %}
 

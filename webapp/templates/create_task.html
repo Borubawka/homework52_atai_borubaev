@@ -2,19 +2,43 @@
 {% block title %}
 Добавить задачу
 {% endblock %}
-
 {% block content %}
 
-<h1>Добавить задачу</h1>
+<div class="row justify-content-center">
 
-<form method="POST">
+    <div class="col-md-8">
 
-    {% include 'includes/task_form.html' %}
+        <div class="card shadow-sm">
 
-    <button type="submit">
-        Добавить
-    </button>
+            <div class="card-header">
 
-</form>
+                <h2 class="mb-0">
+                    Добавить задачу
+                </h2>
+
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST">
+
+                    {% include 'includes/task_form.html' %}
+
+                    <button
+                        type="submit"
+                        class="btn btn-success"
+                    >
+                        Добавить
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock %}

@@ -1,3 +1,37 @@
 {% csrf_token %}
 
-{{ form.as_p }}
+{% if form.non_field_errors %}
+
+<div class="alert alert-danger">
+
+    {{ form.non_field_errors }}
+
+</div>
+
+{% endif %}
+
+{% for field in form %}
+
+<div class="mb-3">
+
+    <label class="form-label">
+
+        {{ field.label }}
+
+    </label>
+
+    {{ field }}
+
+    {% if field.errors %}
+
+        <div class="text-danger mt-1">
+
+            {{ field.errors }}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endfor %}

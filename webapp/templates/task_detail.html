@@ -1,56 +1,99 @@
 {% extends 'base.html' %}
 {% block title %}
-Подробности задачи
+{{ task.summary }}
 {% endblock %}
 {% block content %}
 
-<h1>Подробности задачи</h1>
+<div class="row justify-content-center">
 
-<div class="task-card">
+    <div class="col-md-8">
 
-    <h2>{{ task.summary }}</h2>
+        <div class="card shadow-sm">
 
-    <p>
-        <strong>Типы:</strong>
+            <div class="card-header">
 
-        {% for task_type in task.task_types.all %}
-            {{ task_type.title }}
-            {% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    </p>
+                <h2 class="mb-0">
+                    {{ task.summary }}
+                </h2>
 
-    <p>
-        <strong>Статус:</strong>
-        {{ task.status.title }}
-    </p>
+            </div>
 
-    <p>
-        <strong>Создана:</strong>
-        {{ task.created_at|date:"d.m.Y H:i" }}
-    </p>
+            <div class="card-body">
 
-    <p>
-        <strong>Обновлена:</strong>
-        {{ task.updated_at|date:"d.m.Y H:i" }}
-    </p>
+                <p>
 
-    <hr>
+                    <strong>Типы:</strong>
 
-    <h3>Описание</h3>
+                    {% for task in tasks %}
+                        {{ task_type.title }}
+                        {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
 
-    <p class="details">
-        {{ task.description }}
-    </p>
+                </p>
 
-    <br>
+                <p>
 
-    <a href="{% url 'task_edit' task.id %}" class="btn btn-edit">
-        Редактировать
-    </a>
+                    <strong>Статус:</strong>
+                    {{ task.status.title }}
 
-    <a href="{% url 'task_delete' task.id %}" class="btn btn-delete">
-        Удалить
-    </a>
+                </p>
+
+                <p>
+
+                    <strong>Создана:</strong>
+                    {{ task.created_at|date:"d.m.Y H:i" }}
+
+                </p>
+
+                <p>
+
+                    <strong>Обновлена:</strong>
+                    {{ task.updated_at|date:"d.m.Y H:i" }}
+
+                </p>
+
+                <hr>
+
+                <h5>
+                    Описание
+                </h5>
+
+                <p>
+
+                    {{ task.description }}
+
+                </p>
+
+            </div>
+
+            <div class="card-footer">
+
+                <a
+                    href="{% url 'task_edit' task.id %}"
+                    class="btn btn-primary"
+                >
+                    Редактировать
+                </a>
+
+                <a
+                    href="{% url 'task_delete' task.id %}"
+                    class="btn btn-danger"
+                >
+                    Удалить
+                </a>
+
+                <a
+                    href="{% url 'project_detail' task.project.id %}"
+                    class="btn btn-secondary"
+                >
+                    К проекту
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
