@@ -1,15 +1,5 @@
 [
 {
-    "model": "webapp.project",
-    "pk": 1,
-    "fields": {
-        "name": "Основной проект",
-        "description": "Тестовый проект для существующих задач",
-        "start_date": "2026-06-21",
-        "end_date": null
-    }
-},
-{
     "model": "webapp.tasktype",
     "pk": 1,
     "fields": {
@@ -55,7 +45,6 @@
     "model": "webapp.task",
     "pk": 1,
     "fields": {
-        "project": 1,
         "summary": "Обновить БД",
         "description": "Для избежания конфликтов с прежними записями БД, обновить БД",
         "status": 2,
@@ -70,67 +59,54 @@
     "model": "webapp.task",
     "pk": 2,
     "fields": {
-        "project": 1,
         "summary": "Создать админку",
         "description": "После обновления БД зарегать админку",
         "status": 1,
         "created_at": "2026-06-10T16:17:13.265Z",
-        "updated_at": "2026-06-14T08:28:49.563Z",
-        "task_types": [
-            1
-        ]
+        "updated_at": "2026-06-10T16:17:19.705Z",
+        "task_types": []
     }
 },
 {
     "model": "webapp.task",
     "pk": 3,
     "fields": {
-        "project": 1,
         "summary": "Обновить задачи",
         "description": "Добавить новые задачи",
-        "status": 2,
+        "status": 1,
         "created_at": "2026-06-10T16:18:17.486Z",
-        "updated_at": "2026-06-14T08:29:05.252Z",
-        "task_types": [
-            3
-        ]
+        "updated_at": "2026-06-10T16:18:17.486Z",
+        "task_types": []
     }
 },
 {
     "model": "webapp.task",
     "pk": 4,
     "fields": {
-        "project": 1,
         "summary": "Словить баг",
         "description": "Словить баг и долго с ним мучиться",
-        "status": 2,
+        "status": 1,
         "created_at": "2026-06-10T16:18:50.377Z",
-        "updated_at": "2026-06-14T08:29:16.205Z",
-        "task_types": [
-            2
-        ]
+        "updated_at": "2026-06-10T16:18:50.377Z",
+        "task_types": []
     }
 },
 {
     "model": "webapp.task",
     "pk": 5,
     "fields": {
-        "project": 1,
         "summary": "Найти решение бага",
         "description": "Найти корень бага, исправить и получить облегчение в награду",
         "status": 3,
         "created_at": "2026-06-10T16:19:41.688Z",
-        "updated_at": "2026-06-14T08:29:26.613Z",
-        "task_types": [
-            2
-        ]
+        "updated_at": "2026-06-10T16:19:41.688Z",
+        "task_types": []
     }
 },
 {
     "model": "webapp.task",
     "pk": 6,
     "fields": {
-        "project": 1,
         "summary": "ваывавы",
         "description": "фававыавы",
         "status": 2,
@@ -146,7 +122,6 @@
     "model": "webapp.task",
     "pk": 7,
     "fields": {
-        "project": 1,
         "summary": "теееест",
         "description": "Тест тест",
         "status": 2,
@@ -163,7 +138,6 @@
     "model": "webapp.task",
     "pk": 8,
     "fields": {
-        "project": 1,
         "summary": "тест1",
         "description": "",
         "status": 1,
@@ -179,7 +153,6 @@
     "model": "webapp.task",
     "pk": 9,
     "fields": {
-        "project": 1,
         "summary": "Bug при регистрации",
         "description": "Регистрация выдала ошибку",
         "status": 1,
@@ -194,7 +167,6 @@
     "model": "webapp.task",
     "pk": 10,
     "fields": {
-        "project": 1,
         "summary": "Поле логина содержало bug",
         "description": "Ошибка в поел логина",
         "status": 3,
@@ -209,7 +181,6 @@
     "model": "webapp.task",
     "pk": 11,
     "fields": {
-        "project": 1,
         "summary": "Bug пофикшен",
         "description": "Пофиксил все баги",
         "status": 3,
@@ -224,7 +195,6 @@
     "model": "webapp.task",
     "pk": 12,
     "fields": {
-        "project": 1,
         "summary": "Проверить почту на наличие новых запросов",
         "description": "Ежедневная проверка почты",
         "status": 2,
@@ -239,7 +209,6 @@
     "model": "webapp.task",
     "pk": 13,
     "fields": {
-        "project": 1,
         "summary": "Найти способ обновить БД без потери данных",
         "description": "Потерялись связи в БД",
         "status": 1,
@@ -255,7 +224,6 @@
     "model": "webapp.task",
     "pk": 14,
     "fields": {
-        "project": 1,
         "summary": "Оптимизирвоать запросы",
         "description": "Оптимизировать ORM запросы",
         "status": 1,
@@ -270,7 +238,6 @@
     "model": "webapp.task",
     "pk": 15,
     "fields": {
-        "project": 1,
         "summary": "Bug в профиле",
         "description": "Пофиксить ошибку в профиле",
         "status": 2,
@@ -285,7 +252,6 @@
     "model": "webapp.task",
     "pk": 16,
     "fields": {
-        "project": 1,
         "summary": "Обновить и протестировать",
         "description": "Посмотреть как работает после обновления",
         "status": 1,
