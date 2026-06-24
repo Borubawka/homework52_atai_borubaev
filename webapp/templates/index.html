@@ -10,12 +10,16 @@
         Список проектов
     </h1>
 
+    {% if user.is_authenticated %}
+
     <a
         href="{% url 'project_add' %}"
         class="btn btn-success"
     >
         Создать проект
     </a>
+
+    {% endif %}
 
 </div>
 
@@ -81,7 +85,9 @@
                         {{ project.description|truncatechars:100 }}
 
                     {% else %}
+
                         Описание отсутствует
+
                     {% endif %}
 
                 </p>
@@ -157,11 +163,7 @@
         <li class="page-item active">
 
             <span class="page-link">
-
-                {{ page_obj.number }}
-                /
-                {{ page_obj.paginator.num_pages }}
-
+                {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
             </span>
 
         </li>

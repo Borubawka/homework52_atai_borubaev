@@ -12,6 +12,8 @@ from django.views.generic import (
 )
 from webapp.models import (Task, Project)
 from webapp.forms import (TaskForm, ProjectForm)
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 class IndexView(ListView):
 
     model = Project
@@ -56,8 +58,7 @@ class ProjectDetailView(View):
             context
         )
 
-class ProjectCreateView(CreateView):
-
+class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
     form_class = ProjectForm
     template_name = 'project_create.html'
@@ -71,8 +72,7 @@ class ProjectCreateView(CreateView):
             }
         )
 
-class ProjectUpdateView(UpdateView):
-
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
     form_class = ProjectForm
     template_name = 'project_update.html'
@@ -88,8 +88,7 @@ class ProjectUpdateView(UpdateView):
             }
         )
 
-class ProjectDeleteView(DeleteView):
-
+class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     model = Project
     template_name = 'project_delete.html'
 
@@ -112,8 +111,7 @@ class TaskDetailView(DetailView):
             is_deleted=False
         )
 
-class TaskCreateView(FormView):
-
+class TaskCreateView(LoginRequiredMixin, FormView):
     template_name = 'create_task.html'
     form_class = TaskForm
 
@@ -137,8 +135,7 @@ class TaskCreateView(FormView):
             task_id=task.id
         )
 
-class TaskUpdateView(UpdateView):
-
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = TaskForm
     template_name = 'edit_task.html'
@@ -160,8 +157,7 @@ class TaskUpdateView(UpdateView):
             }
         )
 
-class TaskDeleteView(DeleteView):
-
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'delete_task.html'
     context_object_name = 'task'

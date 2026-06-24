@@ -6,34 +6,37 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <h1 class="mb-0">
-        {{ project.name }}
-    </h1>
+<h1 class="mb-0">
+    {{ project.name }}
+</h1>
 
-    <div>
+{% if user.is_authenticated %}
 
-        <a
-            href="{% url 'project_edit' project.id %}"
-            class="btn btn-primary"
-        >
-            Редактировать
-        </a>
+<div>
 
-        <a
-            href="{% url 'project_delete' project.id %}"
-            class="btn btn-danger"
-        >
-            Удалить
-        </a>
+    <a
+        href="{% url 'project_edit' project.id %}"
+        class="btn btn-primary"
+    >
+        Редактировать
+    </a>
 
-        <a
-            href="{% url 'task_add' project.id %}"
-            class="btn btn-success"
-        >
-            Создать задачу
-        </a>
+    <a
+        href="{% url 'project_delete' project.id %}"
+        class="btn btn-danger"
+    >
+        Удалить
+    </a>
 
-    </div>
+    <a
+        href="{% url 'task_add' project.id %}"
+        class="btn btn-success"
+    >
+        Создать задачу
+    </a>
+
+</div>
+{% endif %}
 
 </div>
 
@@ -41,29 +44,29 @@
 
     <div class="card-body">
 
-        <h5 class="card-title">
-            Информация о проекте
-        </h5>
+    <h5 class="card-title">
+        Информация о проекте
+    </h5>
 
-        <p>
-            <strong>Описание:</strong><br>
-            {{ project.description }}
-        </p>
+    <p>
+        <strong>Описание:</strong><br>
+        {{ project.description }}
+    </p>
 
-        <p>
-            <strong>Дата начала:</strong>
-            {{ project.start_date }}
-        </p>
+    <p>
+        <strong>Дата начала:</strong>
+        {{ project.start_date }}
+    </p>
 
-        <p>
-            <strong>Дата окончания:</strong>
+    <p>
+        <strong>Дата окончания:</strong>
 
-            {% if project.end_date %}
-                {{ project.end_date }}
-            {% else %}
-                Не указана
-            {% endif %}
-        </p>
+        {% if project.end_date %}
+            {{ project.end_date }}
+        {% else %}
+            Не указана
+        {% endif %}
+    </p>
 
     </div>
 
@@ -74,69 +77,71 @@
 </h2>
 
 <div class="row">
-
     {% for task in tasks %}
 
-        <div class="col-md-6 mb-4">
+    <div class="col-md-6 mb-4">
 
-            <div class="card h-100 shadow-sm">
+        <div class="card h-100 shadow-sm">
 
-                <div class="card-body">
+            <div class="card-body">
 
-                    <h5 class="card-title">
-                        {{ task.summary }}
-                    </h5>
+                <h5 class="card-title">
+                    {{ task.summary }}
+                </h5>
 
-                    <p class="card-text">
+                <p class="card-text">
 
-                        <strong>Статус:</strong>
-                        {{ task.status.title }}
+                    <strong>Статус:</strong>
+                    {{ task.status.title }}
 
-                    </p>
+                </p>
 
-                </div>
+            </div>
 
-                <div class="card-footer bg-white">
+            <div class="card-footer bg-white">
 
-                    <a
-                        href="{% url 'task_detail' task.id %}"
-                        class="btn btn-outline-primary btn-sm"
-                    >
-                        Подробнее
-                    </a>
+                <a
+                    href="{% url 'task_detail' task.id %}"
+                    class="btn btn-outline-primary btn-sm"
+                >
+                    Подробнее
+                </a>
 
-                    <a
-                        href="{% url 'task_edit' task.id %}"
-                        class="btn btn-outline-warning btn-sm"
-                    >
-                        Редактировать
-                    </a>
+                {% if user.is_authenticated %}
 
-                    <a
-                        href="{% url 'task_delete' task.id %}"
-                        class="btn btn-outline-danger btn-sm"
-                    >
-                        Удалить
-                    </a>
+                <a
+                    href="{% url 'task_edit' task.id %}"
+                    class="btn btn-outline-warning btn-sm"
+                >
+                    Редактировать
+                </a>
 
-                </div>
+                <a
+                    href="{% url 'task_delete' task.id %}"
+                    class="btn btn-outline-danger btn-sm"
+                >
+                    Удалить
+                </a>
+
+                {% endif %}
 
             </div>
 
         </div>
 
-    {% empty %}
+    </div>
 
-        <div class="col-12">
+{% empty %}
 
-            <div class="alert alert-info">
+    <div class="col-12">
 
-                В проекте пока нет задач.
+        <div class="alert alert-info">
 
-            </div>
+            В проекте пока нет задач.
 
         </div>
 
+    </div>
     {% endfor %}
 
 </div>
