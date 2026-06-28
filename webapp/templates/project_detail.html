@@ -12,7 +12,7 @@
 
 <div>
 
-    {% if perms.webapp.change_project %}
+    {% if user_role == 'manager' %}
 
     <a
         href="{% url 'project_edit' project.id %}"
@@ -23,7 +23,7 @@
 
     {% endif %}
 
-    {% if perms.webapp.delete_project %}
+    {% if user_role == 'manager' %}
 
     <a
         href="{% url 'project_delete' project.id %}"
@@ -34,7 +34,7 @@
 
     {% endif %}
 
-    {% if perms.webapp.add_task %}
+    {% if user_role == 'manager' or user_role == 'lead' or user_role == 'developer' %}
 
     <a
         href="{% url 'task_add' project.id %}"
@@ -82,6 +82,101 @@
 
 </div>
 
+<div class="card shadow-sm mb-4">
+
+    <div class="card-body">
+
+        <h5 class="card-title">
+            Участники проекта
+        </h5>
+
+        {% if members %}
+
+            <ul class="list-group mb-3">
+
+                {% for member in members %}
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <strong>
+                                {{ member.user.get_full_name|default:member.user.username }}
+                            </strong>
+
+                            <br>
+
+                            <small class="text-muted">
+                                {{ member.get_role_display }}
+                            </small>
+
+                        </div>
+
+                        {% if user_role == 'manager' or user_role == 'lead' %}
+
+                        <form
+                            method="post"
+                            action="{% url 'project_member_delete' project.id member.id %}"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="btn btn-outline-danger btn-sm"
+                            >
+                                Удалить
+                            </button>
+
+                        </form>
+
+                        {% endif %}
+
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+
+        {% else %}
+
+            <div class="alert alert-warning mb-3">
+
+                В проект еще не добавлены участники.
+
+            </div>
+
+        {% endif %}
+
+        {% if user_role == 'manager' or user_role == 'lead' %}
+
+        <hr>
+
+        <h6>
+            Добавить участника
+        </h6>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{ member_form.as_p }}
+
+            <button
+                type="submit"
+                class="btn btn-success"
+            >
+                Добавить
+            </button>
+
+        </form>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
 <h2 class="mb-3">
     Задачи проекта
 </h2>
@@ -118,7 +213,7 @@
                     Подробнее
                 </a>
 
-                {% if perms.webapp.change_task %}
+                {% if user_role == 'manager' or user_role == 'lead' or user_role == 'developer' %}
 
                 <a
                     href="{% url 'task_edit' task.id %}"
@@ -129,7 +224,7 @@
 
                 {% endif %}
 
-                {% if perms.webapp.delete_task %}
+                {% if user_role == 'manager' or user_role == 'lead' %}
 
                 <a
                     href="{% url 'task_delete' task.id %}"

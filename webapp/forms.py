@@ -4,7 +4,8 @@ from webapp.models import (
     Task,
     TaskStatus,
     TaskType,
-    Project
+    Project,
+    ProjectMember
 )
 
 class ProjectForm(forms.ModelForm):
@@ -91,3 +92,30 @@ class TaskForm(forms.ModelForm):
                 )
 
         return cleaned_data
+
+class ProjectMemberForm(forms.ModelForm):
+
+    class Meta:
+        model = ProjectMember
+
+        fields = (
+            'user',
+            'role',
+        )
+
+        labels = {
+            'user': 'Пользователь',
+            'role': 'Роль в проекте',
+        }
+
+    def clean_role(self):
+
+        role = self.cleaned_data['role']
+
+        if len(role) < 2:
+
+            raise ValidationError(
+                'Введите роль участника'
+            )
+
+        return role
