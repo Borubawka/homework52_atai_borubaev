@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -19,6 +20,11 @@ class RegisterView(CreateView):
         login(
             self.request,
             self.object
+        )
+
+        messages.success(
+            self.request,
+            'Регистрация прошла успешно!'
         )
 
         next_url = self.request.GET.get('next')

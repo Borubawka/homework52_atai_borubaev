@@ -68,7 +68,7 @@
 
             <div class="card-footer">
 
-                {% if user.is_authenticated %}
+                {% if perms.webapp.change_task %}
 
                     <a
                         href="{% url 'task_edit' task.id %}"
@@ -76,6 +76,10 @@
                     >
                         Редактировать
                     </a>
+
+                {% endif %}
+
+                {% if perms.webapp.delete_task %}
 
                     <a
                         href="{% url 'task_delete' task.id %}"

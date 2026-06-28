@@ -10,7 +10,7 @@
         Список проектов
     </h1>
 
-    {% if user.is_authenticated %}
+    {% if perms.webapp.add_project %}
 
     <a
         href="{% url 'project_add' %}"
