@@ -1,0 +1,251 @@
+[
+{
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+        "name": "Developer",
+        "permissions": [
+            33,
+            34,
+            36
+        ]
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+        "name": "Project Manager",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 4,
+    "fields": {
+        "name": "Team Lead",
+        "permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$QTpRWTxi78GehRXwvIv1Jy$dO5zqPSa1gWh+STcvDoasSMwFwjJviKmK+Fy1VnJVKI=",
+        "last_login": "2026-06-28T20:22:59.645Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@test.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-06-28T17:58:10.687Z",
+        "birth_date": null,
+        "bio": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$wIboDwKWRKhMT8FPs1gmes$hZ/ouHmCcggWrQ7Zbhq47Tg4mzm7pWJnWA7DM7bd2+k=",
+        "last_login": "2026-06-28T19:52:01.885Z",
+        "is_superuser": false,
+        "username": "borubawka",
+        "first_name": "Атай",
+        "last_name": "Борубаев",
+        "email": "test@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-06-28T19:06:31Z",
+        "birth_date": "1991-01-17",
+        "bio": "dfdsfsfdsf",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$DjTmhacy001UvewUXUIo6k$rObFA4otlBoyepPKcspi3SfwXNEF6CBFe2AaEZqJhlY=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "manager",
+        "first_name": "Project",
+        "last_name": "Manager",
+        "email": "manager@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-06-29T10:21:30.765Z",
+        "birth_date": null,
+        "bio": "",
+        "groups": [
+            3
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$yJGK1kZGQnQZHKeUrev43F$jYART+UtZhEUtUt0gC1H0Z1LU7Sn/HS5xzDhx/ywcGU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "lead",
+        "first_name": "Team",
+        "last_name": "Lead",
+        "email": "lead@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-06-29T10:21:31.648Z",
+        "birth_date": null,
+        "bio": "",
+        "groups": [
+            4
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$LRPQJXZkTvQuM2b9dAtTuJ$1IXMlZcd5A8Lbc7xXSUB69hV7Kt4T0a4bAh+O/B7BDE=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "dev",
+        "first_name": "Developer",
+        "last_name": "User",
+        "email": "dev@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-06-29T10:21:32.505Z",
+        "birth_date": null,
+        "bio": "",
+        "groups": [
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "webapp.project",
+    "pk": 2,
+    "fields": {
+        "name": "dfsdfsdf",
+        "description": "dsfsdfdsfsdfsdfdsfdsf",
+        "start_date": "2026-06-27",
+        "end_date": "2026-07-05"
+    }
+},
+{
+    "model": "webapp.project",
+    "pk": 3,
+    "fields": {
+        "name": "tertet",
+        "description": "ertete",
+        "start_date": "2026-07-05",
+        "end_date": "2026-07-12"
+    }
+},
+{
+    "model": "webapp.projectmember",
+    "pk": 2,
+    "fields": {
+        "project": 2,
+        "user": 2,
+        "role": "manager"
+    }
+},
+{
+    "model": "webapp.projectmember",
+    "pk": 3,
+    "fields": {
+        "project": 3,
+        "user": 1,
+        "role": "manager"
+    }
+},
+{
+    "model": "webapp.tasktype",
+    "pk": 1,
+    "fields": {
+        "title": "Bug"
+    }
+},
+{
+    "model": "webapp.tasktype",
+    "pk": 2,
+    "fields": {
+        "title": "Entertaiment"
+    }
+},
+{
+    "model": "webapp.tasktype",
+    "pk": 3,
+    "fields": {
+        "title": "Task"
+    }
+},
+{
+    "model": "webapp.taskstatus",
+    "pk": 1,
+    "fields": {
+        "title": "Новая"
+    }
+},
+{
+    "model": "webapp.taskstatus",
+    "pk": 2,
+    "fields": {
+        "title": "В процессе"
+    }
+},
+{
+    "model": "webapp.taskstatus",
+    "pk": 3,
+    "fields": {
+        "title": "Выполнена"
+    }
+},
+{
+    "model": "webapp.task",
+    "pk": 1,
+    "fields": {
+        "project": 2,
+        "summary": "fdfgdfg",
+        "description": "dfgdfgdfg",
+        "status": 2,
+        "is_deleted": false,
+        "created_at": "2026-06-28T19:53:02.424Z",
+        "updated_at": "2026-06-28T19:53:06.967Z",
+        "task_types": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "webapp.task",
+    "pk": 2,
+    "fields": {
+        "project": 3,
+        "summary": "jkhjkh",
+        "description": "jhkhjk",
+        "status": 1,
+        "is_deleted": true,
+        "created_at": "2026-06-28T22:33:06.499Z",
+        "updated_at": "2026-06-28T22:33:36.342Z",
+        "task_types": [
+            1
+        ]
+    }
+}
+]
